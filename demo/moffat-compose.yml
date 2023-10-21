@@ -1,0 +1,30 @@
+version: '3.7'
+
+services:
+  moffat-database:
+    container_name: moffat-database
+    hostname: moffat-database
+    build:
+      context: MoffatDatabase
+      dockerfile: Dockerfile
+    ports:
+      - 33306:3306
+
+  moffat-backend:
+    container_name: moffat-backend
+    hostname: moffat-backend
+    build:
+      context: MoffatBackend
+      dockerfile: Dockerfile
+    ports:
+      - 8081:80
+
+  moffat-frontend:
+    container_name: moffat-frontend
+    hostname: moffat-frontend
+    build:
+      context: MoffatFrontend
+      dockerfile: Dockerfile
+    ports:
+      - 8080:80
+

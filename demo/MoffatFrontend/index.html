@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Room Data Example</title>
+</head>
+<body>
+<h1>Moffet Bay</h1>
+<button id="getRoomDataButton">Get Rooms</button>
+<table border="1" id="roomDataTable">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Bed Type</th>
+        <th>Number of Beds</th>
+        <th>Max Guests</th>
+        <th>Price</th>
+    </tr>
+    </thead>
+    <tbody id="roomDataList">
+    </tbody>
+</table>
+
+<script>
+    /**
+     * this is a static implementation of a webpage that can make requests to our backend
+     * API with a fetch request and parse the JSON response into the data we want to show
+     * in the UI
+     */
+    document.getElementById('getRoomDataButton').addEventListener('click', function () {
+        fetch('http://localhost:8081/api/rooms')
+            .then(response => response.json())
+            .then(data => {
+                const roomDataList = data;
+                const tableBody = document.getElementById('roomDataList');
+
+                tableBody.innerHTML = '';
+
+                roomDataList.forEach(room => {
+                    const id = room.id;
+                    const bedType = room.bedType;
+                    const numberOfBeds = room.numberOfBeds;
+                    const maxGuests = room.maxGuests;
+                    const price = room.price;
+
+                    const row = tableBody.insertRow();
+                    const cell1 = row.insertCell(0);
+                    const cell2 = row.insertCell(1);
+                    const cell3 = row.insertCell(2);
+                    const cell4 = row.insertCell(3);
+                    const cell5 = row.insertCell(4);
+
+                    cell1.textContent = id;
+                    cell2.textContent = bedType;
+                    cell3.textContent = numberOfBeds;
+                    cell4.textContent = maxGuests;
+                    cell5.textContent = price;
+                });
+            })
+            .catch(error => console.error('Error:', error));
+    });
+</script>
+</body>
+</html>
