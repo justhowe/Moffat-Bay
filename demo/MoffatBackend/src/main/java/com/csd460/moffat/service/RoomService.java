@@ -1,6 +1,6 @@
 package com.csd460.moffat.service;
-import com.csd460.moffat.dao.MoffatDAO;
-import com.csd460.moffat.room.Room;
+import com.csd460.moffat.dao.RoomDAO;
+import com.csd460.moffat.model.room.Room;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -13,12 +13,12 @@ import java.util.*;
  */
 
 @Service
-public class MoffatService {
+public class RoomService {
 
-    private final MoffatDAO dao;
+    private final RoomDAO dao;
 
-    public MoffatService(){
-        this.dao = new MoffatDAO();
+    public RoomService(){
+        this.dao = new RoomDAO();
     }
 
     public List<Room> getAllRooms(){

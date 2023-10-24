@@ -1,14 +1,14 @@
-package com.csd460.moffat.room;
+package com.csd460.moffat.model.room;
 
 public class Room {
-    private long id;
-    private String bedType;
-    private int numberOfBeds;
-    private int maxGuests;
-    private double price;
+    public long roomId;
+    public String bedType;
+    public int numberOfBeds;
+    public int maxGuests;
+    public double price;
 
-    public Room(long id, String bedType, int numberOfBeds, int maxGuests, double price) {
-        this.id = id;
+    public Room(long roomId, String bedType, int numberOfBeds, int maxGuests, double price) {
+        this.roomId = roomId;
         this.bedType = bedType;
         this.numberOfBeds = numberOfBeds;
         this.maxGuests = maxGuests;
@@ -22,11 +22,11 @@ public class Room {
     }
 
     public long getId() {
-        return id;
+        return roomId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setId(long roomId) {
+        this.roomId = roomId;
     }
 
     public String getBedType() {
@@ -63,7 +63,7 @@ public class Room {
 
     @Override
     public String toString() {
-        return "Room [id=" + id + ", bedType=" + bedType + ", numberOfBeds=" + numberOfBeds + ", maxGuests=" + maxGuests
+        return "Room roomId=" +roomId + ", bedType=" + bedType + ", numberOfBeds=" + numberOfBeds + ", maxGuests=" + maxGuests
                 + ", price=" + price + "]";
     }
 }

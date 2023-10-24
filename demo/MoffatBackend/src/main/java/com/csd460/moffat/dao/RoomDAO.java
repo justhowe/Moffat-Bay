@@ -1,6 +1,6 @@
 package com.csd460.moffat.dao;
 
-import com.csd460.moffat.room.Room;
+import com.csd460.moffat.model.room.Room;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -11,12 +11,12 @@ import java.util.List;
  * Management Service to read or write records to the database
  */
 
-public class MoffatDAO {
+public class RoomDAO {
     private final String jdbcUrl;
     private final String username;
     private final String password;
 
-    public MoffatDAO() {
+    public RoomDAO() {
         this.jdbcUrl = "jdbc:mysql://moffat-database:3306/moffat_db";
         this.username = "moffat_user";
         this.password = "moffat_password";
@@ -35,7 +35,7 @@ public class MoffatDAO {
 
             while (resultSet.next()) {
                 Room room = new Room(
-                    resultSet.getInt("id"),
+                    resultSet.getLong("room_id"),
                     resultSet.getString("bed_type"),
                     resultSet.getInt("number_of_beds"),
                     resultSet.getInt("max_guests"),

@@ -1,15 +1,23 @@
 # Demo
 
 ## Overview
+
+This is just to demonstrate what it would look like to design the moffat bay system with a Representational state transfer API as the backend and not
+something that needs to render HTML on the server side
+
 this Demo uses docker to build and run the Demo which is a lot but I think it will allow us to move faster in the
 end. On all of our dev machines, (works on windows, mac, linux) we would need to install [Docker Desktop](https://www.docker.com/products/docker-desktop/) 
 
 
 ![png](readme-images/dd.png)
 
-I've got a few reasons why I think this is good but will save for later
-
 ## Build and run the Demo
+
+> if youre on windows you might have to make a change to your git config (thanks @drabynoops)
+```shell
+git config --global core.autocrlf input
+```
+
 1. open a terminal either CMD on windows or Terminal on mac to and use `docker compose` ([included with Docker Desktop](https://docs.docker.com/compose/install/))
 ```shell
 cd your/path/to/Moffat-Bay/demo/   # Mac / Linux
@@ -31,7 +39,7 @@ docker ps -a
 ```
 granted there are no errors up to this point you should be able to navigate in your browser of choice to http://localhost:8080/,
 there should be a button there "Get Room Data" which will fetch the data in the demo for rooms. if you're able to do that then 
-everything is running fine
+everything is running fine. 
 
 ## Why use MySQL
 it is dictated by the course and we are familiar with it so seems like a no-op there
@@ -44,14 +52,22 @@ somewhere and that will keep us moving. This is going to be a bigger project and
 a bunch of boiler plate code in my novice opinion. If we look at the following example I think they are much faster and cleaner than using
 Jakarta EE and have clearer separation of concerns instead of having a ton of Swiss army knife JSP pages:
 ```shell
-MoffatBackend/src/main/java/com/csd460/moffat/controllers/Controller.java
-MoffatBackend/src/main/java/com/csd460/moffat/service/MoffetService.java
-MoffatBackend/src/main/java/com/csd460/moffat/dao/MoffetDAO.java
+MoffatBackend/src/main/java/com/csd460/moffat/controllers/RoomController.java
+MoffatBackend/src/main/java/com/csd460/moffat/service/RoomService.java
+MoffatBackend/src/main/java/com/csd460/moffat/dao/RoomDAO.java
 ```
+
+This also makes the ability to write tests for the backend much easier than having frontend backend all in one
 
 ## Why use plain HTML|JS|CSS for the frontend
 We took classes on it so I think it will be something that will be not a huge obstacle for us. Just want to show that passing 
 JSON between frontend and backend with these are possible 
+
+What is really helpful about having the client code separate from the server code is that we can use the browsers debugger to test and work through solutions
+
+![png](readme-images/debugger.png)
+
+we can also use the [Web Crypto Api](https://developer.mozilla.org/en-US/docs/Web/API/Web_Crypto_API) to easily hash passwords and is supported by most browsers
 
 ## Why use Docker here?
 ### reasons why its good for our project
@@ -78,12 +94,10 @@ set up mocks for the data access layer
 
 2. open up a shell to MySQL. Side note all of these containers will be some sort of linux OS
 ```shell
-mysql -u moffat_user -p -h localhost 
-
-# enter the password when prompted: moffat_password
-
-USE moffat_db;
-
+mysql -u moffat_user -pmoffat_password -h localhost -P 3306 -D moffat_db
+```
+then run your query
+```mysql
 SELECT * FROM rooms;
 ```
 
@@ -110,7 +124,7 @@ if you make a change to any of the frontend, backend, or database, all you have 
 ```
 2. run them on your machine
 ```shell
-docker compose -f moffat-compose.yml up -d
+docker compose -f moffat-compose.yml up 
 ```
 
 
