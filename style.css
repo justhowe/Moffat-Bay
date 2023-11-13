@@ -1,0 +1,29 @@
+body{
+    font-family: Arial, sans-serif;
+}
+.header{
+    padding: 20px;
+    text-align: center;
+    background: #1abc9c;
+    color: white;
+}
+.input-group{
+    margin: 10px 0;
+}
+.input-group label{
+    display: block;
+    text-align: center;
+    margin: 10px 0;
+}
+.input-group input{
+    width: 100%;
+    padding: 10px;
+}
+.btn{
+    padding: 10px;
+    font-size: 16px;
+    color: white;
+    background: #1abc9c;
+    border: none;
+    cursor: pointer;
+}
