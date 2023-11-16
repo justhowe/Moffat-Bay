@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Moffat Bay Lodge User Registration</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
     <div class="header">
@@ -11,12 +11,20 @@
 
     <form method="post" action="register.php">
         <div class="input-group">
-            <label>Username</label>
-            <input type="text" name="username" required>
+            <label>First name</label>
+            <input type="text" name="first_name" required>
         </div>
         <div class="input-group">
-            <label>Email</label>
-            <input type="email" name="email" required>
+            <label>Last name</label>
+            <input type="text" name="last_name" required>
+        </div>
+        <div class="input-group">
+            <label>Email / Username</label>
+            <input type="email" name="username" required>
+        </div>
+        <div class="input-group">
+            <label>Phone number</label>
+            <input type="number" name="phone_number" required>
         </div>
         <div class="input-group">
             <label>Password</label>
