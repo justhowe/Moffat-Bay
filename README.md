@@ -88,6 +88,23 @@ you just need to run this from the directory the code is in or it wont work. I a
 
 ![png](docs/readme-docs/start.png)
 
-5. now we just go to http://localhost/index.html in our browser and view the code change
+5. now we just go to http://localhost/index.php in our browser and view the code change
 
 ![png](docs/readme-docs/beautiful-website.png)
+
+
+## Lessons Learned
+
+- remember to use `require_once` instead of `include` when the same dependency will be used in multiple places
+- the function `session_start()` will create a new session only if one does not exist, but reuse if one does exist
+- you can pass values around the application like a context object with [PHP Superglobals](https://www.php.net/manual/en/language.variables.superglobals.php)
+- if you separate your web content into something like this:
+```
+    app
+     |--index.php     # the keyword is index
+     |--login
+         |--index.php
+         |--login.php
+         |--style.css
+```
+then we will have a clean url like a real website https://some-website/login 

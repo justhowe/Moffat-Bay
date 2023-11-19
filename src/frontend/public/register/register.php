@@ -1,11 +1,13 @@
 <?php
-session_start();
-include '../../config/config.php';
 
-# TODO  error handling this is insecure
-$conn = mysqli_connect(MYSQL_HOST, MYSQL_USER, MYSQL_PASSWORD, MYSQL_DATABASE);
+require_once '../model/DAO.php';
+require_once '../model/user.php';
 
-if(isset($_POST['register'])){
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
+if(isset($_POST['register'])) {
 
     $first_name = $_POST['first_name'];
     $last_name = $_POST['last_name'];
@@ -14,26 +16,52 @@ if(isset($_POST['register'])){
     $password = $_POST['password'];
     $confirm_password = $_POST['confirm_password'];
 
-    if($password === $confirm_password){
-        $sql = "SELECT * FROM users WHERE username = '$username'";
-        $result = mysqli_query($conn, $sql);
+    /**
+     * TODO html form should validate that fields are not null and
+     * some basic validation but we should check all fields for things like
+     * - password uses good practices
+     * - no sql statements hidden in fields
+     * - phone number is valid phone number pattern
+     */
+    if($password !== $confirm_password) {
+        $_SESSION['error_msg'] = "passwords do not match";
+        header("Location: index.php");
+        exit();
+    }
 
-        if(mysqli_num_rows($result) > 0){
-            echo "Username already exists";
-        }else{
-            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-            $sql = "INSERT INTO users (username, password_hash, first_name, last_name, phone_number) VALUES ('$username', '$hashed_password', '$first_name', '$last_name', '$phone_number')";
+    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+    $dao = new DAO();
 
-            mysqli_query($conn, $sql);
-
-            $_SESSION['username'] = $username;
-            $_SESSION['password'] = $password;
-
-            //header("location: welcome.php");
-            echo "<script type='text/javascript'>alert(`Registered new user ${username} succesfully`);</script>";
+    // check if user exists
+    try {
+        $existing_user = $dao->get_user_by_username($username);
+        if ($existing_user !== null) {
+            $_SESSION['error_msg'] = "user already exists";
+            header("Location: index.php");
+            exit();
         }
-    }else{
-        echo "Passwords do not match";
+    } catch (NoSuchUserException $e) {
+        // we want this exception to be thrown so the
+        // main execution should go here
+        try {
+            $new_user = $dao->create_user(
+                new User(
+                    $username,
+                    $hashed_password,
+                    $first_name,
+                    $last_name,
+                    $phone_number
+                )
+            );
+            // newly created users should be considered logged
+            // bring them back to main page or rooms page
+            $_SESSION["logged_in"] = $username;
+            header("Location: ../index.php");
+        } catch (Exception $e) {
+            $_SESSION['error_msg'] = "could not create user";
+            header("Location: index.php");
+            exit();
+        }
     }
 }
 ?>

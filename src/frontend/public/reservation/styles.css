@@ -1,0 +1,37 @@
+
+h2 {
+    text-align: center;
+}
+
+form {
+    max-width: 600px;
+    margin: 20px auto;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.calendar {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.calendar th,
+.calendar td {
+    width: 14.2857%;
+    text-align: center;
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+.calendar td {
+    cursor: pointer;
+}
+
+.disabled {
+    cursor: not-allowed;
+    color: #999;
+}

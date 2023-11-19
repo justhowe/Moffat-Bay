@@ -172,16 +172,3 @@ DELIMITER ;
 
 -- output to logging
 SHOW PROCEDURE STATUS WHERE Db = 'moffat_db';
-
--- sample data for testing
-INSERT INTO users (username, password_hash, first_name, last_name, phone_number)
-VALUES ('bryson@localhost.com', '$2a$12$e4XOZ/eHfrDEJ7p6OyAt5u0Ct0NTo1qJbCOGGlLRuGZCw43cBGnjm', 'bryson', 'moffat',
-        5551234567);
-
--- sample data for testing
-INSERT INTO reservations (user_id, room_id, check_in_date, check_out_date)
-VALUES (1, 1, '2023-10-21 14:30:45', '2023-10-22 14:30:45');
-
--- sample data for testing
-INSERT INTO reservations (user_id, room_id, check_in_date, check_out_date)
-VALUES (1, 60, '2023-10-21 14:30:45', '2023-10-31 14:30:45');

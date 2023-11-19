@@ -1,4 +1,16 @@
 @charset "ISO-8859-1";
+/* index.css
+ * these are global variables so we dont have to rewrite css all
+ * over the app
+ */
+
+:root {
+	--app-default: 'Roboto', sans-serif;
+}
+
+body, h1, h2, h3, h4, h5, h6, a, label, input, button form, p{
+	font-family: var(--app-default);
+}
 
 
 * {margin: 0; padding: 0;} 
@@ -29,10 +41,6 @@
   	background-color: #2196F3;
   	padding: 10px;
 }
-
-
-
-
 
 ul li {
 	padding-top: 10px;

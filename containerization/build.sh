@@ -31,6 +31,7 @@ function check_deps(){
 function create_containers() {
   cp -r ../src . || throw_exception "could not locate src"
   cp frontend.Dockerfile src/frontend/.
+  cp config.php src/frontend/.
   cp database.Dockerfile src/database/.
   docker compose -f moffat-compose.yml build || throw_exception "failed to build project"
   docker compose -f moffat-compose.yml up -d || throw_exception "failed to start project"
