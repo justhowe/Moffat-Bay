@@ -3,7 +3,7 @@ session_start();
 include '../../config/config.php';
 
 # TODO  error handling this is insecure
-$conn = new mysqli(MYSQL_HOST, MYSQL_USER, MYSQL_PASSWORD, MYSQL_DATABASE);
+$conn = mysqli_connect(MYSQL_HOST, MYSQL_USER, MYSQL_PASSWORD, MYSQL_DATABASE);
 
 if(isset($_POST['register'])){
 

@@ -1,4 +1,9 @@
+CREATE USER 'moffat_user'@'localhost' IDENTIFIED BY 'moffat_password';
+
 CREATE DATABASE IF NOT EXISTS moffat_db;
+
+GRANT ALL PRIVILEGES ON * . * TO 'moffat_user'@'localhost';
+
 USE moffat_db;
 
 CREATE TABLE IF NOT EXISTS users
@@ -92,8 +97,8 @@ CREATE TABLE IF NOT EXISTS reservations
     reservation_id BIGINT AUTO_INCREMENT PRIMARY KEY,
     user_id        BIGINT    NOT NULL,
     room_id        BIGINT    NOT NULL,
-    check_in_date  TIMESTAMP NOT NULL,
-    check_out_date TIMESTAMP NOT NULL
+    check_in_date  TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    check_out_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 ALTER TABLE reservations
