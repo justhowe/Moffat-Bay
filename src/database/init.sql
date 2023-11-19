@@ -55,27 +55,27 @@ VALUES ('Double', 2, 4, @d2_room_price),
        ('Double', 2, 4, @d2_room_price),
        ('Double', 2, 4, @d2_room_price),
        ('Double', 2, 4, @d2_room_price),
-       ('Queen', 1, 2, @q1_room_price),
-       ('Queen', 1, 2, @q1_room_price),
-       ('Queen', 1, 2, @q1_room_price),
-       ('Queen', 1, 2, @q1_room_price),
-       ('Queen', 1, 2, @q1_room_price),
-       ('Queen', 1, 2, @q1_room_price),
-       ('Queen', 1, 2, @q1_room_price),
-       ('Queen', 1, 2, @q1_room_price),
-       ('Queen', 1, 2, @q1_room_price),
-       ('Queen', 1, 2, @q1_room_price),
-       ('Queen', 1, 2, @q1_room_price),
-       ('Queen', 1, 2, @q1_room_price),
-       ('Queen', 1, 2, @q1_room_price),
-       ('Queen', 2, 2, @q2_room_price),
-       ('Queen', 2, 2, @q2_room_price),
-       ('Queen', 2, 2, @q2_room_price),
-       ('Queen', 2, 2, @q2_room_price),
-       ('Queen', 2, 2, @q2_room_price),
-       ('Queen', 2, 2, @q2_room_price),
-       ('Queen', 2, 2, @q2_room_price),
-       ('Queen', 2, 2, @q2_room_price),
+       ('Queen', 1, 3, @q1_room_price),
+       ('Queen', 1, 3, @q1_room_price),
+       ('Queen', 1, 3, @q1_room_price),
+       ('Queen', 1, 3, @q1_room_price),
+       ('Queen', 1, 3, @q1_room_price),
+       ('Queen', 1, 3, @q1_room_price),
+       ('Queen', 1, 3, @q1_room_price),
+       ('Queen', 1, 3, @q1_room_price),
+       ('Queen', 1, 3, @q1_room_price),
+       ('Queen', 1, 3, @q1_room_price),
+       ('Queen', 1, 3, @q1_room_price),
+       ('Queen', 1, 3, @q1_room_price),
+       ('Queen', 1, 3, @q1_room_price),
+       ('Queen', 2, 4, @q2_room_price),
+       ('Queen', 2, 4, @q2_room_price),
+       ('Queen', 2, 4, @q2_room_price),
+       ('Queen', 2, 4, @q2_room_price),
+       ('Queen', 2, 4, @q2_room_price),
+       ('Queen', 2, 4, @q2_room_price),
+       ('Queen', 2, 4, @q2_room_price),
+       ('Queen', 2, 4, @q2_room_price),
        ('King', 1, 2, @k1_room_price),
        ('King', 1, 2, @k1_room_price),
        ('King', 1, 2, @k1_room_price),
@@ -169,6 +169,35 @@ BEGIN
 END $$
 DELIMITER ;
 
+-- Get rooms that are not used in another reservation for the desired duration, bed type, and number
+-- CALL GetAvailableRoomsByRoomType('2023-10-25 00:00:00', '2023-10-30 00:00:00', 'Queen', 2);
+-- CALL GetAvailableRoomsByRoomType('2023-11-20 12:00:00', '2023-11-21 12:00:00', 'King', 1);
+DELIMITER $$
+CREATE PROCEDURE GetAvailableRoomsByGuests(
+    IN checkin_date TIMESTAMP,
+    IN checkout_date TIMESTAMP,
+    IN number_of_guests INTEGER
+    )
+BEGIN
+    WITH available_rooms AS (
+        SELECT r.room_id,
+               r.bed_type,
+               r.number_of_beds,
+               r.max_guests,
+               r.price,
+               CASE
+                   WHEN res.room_id IS NOT NULL THEN 0
+                   ELSE 1
+                   END AS availability
+        FROM rooms r
+                 LEFT JOIN reservations res ON r.room_id = res.room_id
+            AND (checkin_date <= res.check_out_date AND checkout_date >= res.check_in_date)
+    )
+    SELECT room_id, bed_type, number_of_beds, max_guests, price
+    FROM available_rooms
+    WHERE availability = 1 AND number_of_guests <= max_guests;
+END $$
+DELIMITER ;
 
 -- output to logging
 SHOW PROCEDURE STATUS WHERE Db = 'moffat_db';

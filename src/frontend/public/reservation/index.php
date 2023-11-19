@@ -1,7 +1,6 @@
 <?php
 require_once '../components/navbar.php';
 require_once '../components/error_modal.php';
-require_once 'generate_calendar.php';
 
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
@@ -12,39 +11,33 @@ if (session_status() == PHP_SESSION_NONE) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Room Reservation</title>
+    <title>Room Reservations</title>
     <link rel="stylesheet" href="styles.css">
 </head>
     <body>
-        <?php
-        echo generate_navbar();
-        echo generate_error_modal_container();
-        ?>
+    <?php
+    echo generate_navbar();
+    echo generate_error_modal_container();
+    ?>
+    <form method="post" action="process_list_room_request.php">
 
-        <h2>Select Check-in and Check-out Dates</h2>
+        <label for="checkin_date">Choose a check in date:</label>
+        <input type="date" id="checkin_date" name="checkin_date">
 
-        <form action="reservation.php" method="post">
-            <!-- Calendar for Check-in Date -->
-            <label for="checkInDate">Check-in Date:</label>
-            <?php generate_calendar('checkInDate'); ?>
+        <label for="checkout_date">Choose a check out date:</label>
+        <input type="date" id="checkout_date" name="checkout_date">
 
-            <!-- Calendar for Check-out Date -->
-            <label for="checkOutDate">Check-out Date:</label>
-            <?php generate_calendar('checkOutDate'); ?>
+        <label for="number_of_guests">Select number of Guests:</label>
+        <select id="number_of_guests" name="number_of_guests">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
 
-            <button type="submit" name="submit">Submit Reservation</button>
-        </form>
+        <button type="submit">Find Available Rooms</button>
+    </form>
 
-        <?php
-        // Handle form submission
-        if (isset($_POST['submit'])) {
-            $checkInDate = $_POST['checkInDate'];
-            $checkOutDate = $_POST['checkOutDate'];
-
-            // Add your logic to handle the reservation data
-            // For example, store the reservation details in a database
-            echo "<p>Reservation Successful! Check-in: $checkInDate, Check-out: $checkOutDate</p>";
-        }
-        ?>
     </body>
 </html>

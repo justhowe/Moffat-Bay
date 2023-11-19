@@ -1,37 +1,71 @@
-
-h2 {
-    text-align: center;
+body {
+    font-family: var(--app-default);
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
 }
 
 form {
-    max-width: 600px;
+    font-family: var(--app-default);
+    max-width: 400px;
     margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 label {
+    font-family: var(--app-default);
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
 }
 
-.calendar {
+input {
+    font-family: var(--app-default);
     width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
+    padding: 8px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
 }
 
-.calendar th,
-.calendar td {
-    width: 14.2857%;
-    text-align: center;
-    border: 1px solid #ddd;
-    padding: 10px;
-}
-
-.calendar td {
+button {
+    font-family: var(--app-default);
+    background-color: #4caf50;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
     cursor: pointer;
 }
 
-.disabled {
-    cursor: not-allowed;
-    color: #999;
+button:hover {
+    background-color: #45a049;
 }
+
+table {
+    font-family: var(--app-default);
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #4caf50;
+    color: white;
+}
+
+tr:hover {
+    background-color: #f5f5f5;
+}
+
+

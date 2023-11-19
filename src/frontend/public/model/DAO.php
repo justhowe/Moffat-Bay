@@ -1,6 +1,10 @@
 <?php
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 require_once '../../config/config.php';
 require_once '../model/user.php';
+require_once '../model/room.php';
 require_once '../exception/exceptions.php';
 /**
  * this is the data access object that i think should hold most of our
@@ -66,6 +70,48 @@ class DAO {
             $err_msg = $e->getMessage();
             throw new Exception("could not insert user $username, $err_msg");
         }
+    }
+
+    public function get_available_rooms_by_room_type($checkin_time, $checkout_time, $number_of_guests) {
+        $rooms = [];
+
+        $stmt = $this->conn->prepare("CALL GetAvailableRoomsByGuests(?, ?, ?)");
+        $stmt->bind_param("ssi", $checkin_time, $checkout_time, $number_of_guests);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $rooms[] = new Room(
+                    $row['room_id'],
+                    $row['bed_type'],
+                    $row['number_of_beds'],
+                    $row['max_guests'],
+                    $row['price']
+                );
+            }
+        } else {
+            throw new NoVacancyException(
+                "no available rooms for $number_of_guests guests within $checkin_time to $checkout_time"
+            );
+        }
+        return $rooms;
+    }
+
+    public function create_reservation($user_id, $room_id, $checkin_date, $checkout_date) {
+        $sql = "INSERT INTO reservations (user_id, room_id, check_in_date, check_out_date) 
+                VALUES ($user_id, $room_id, '$checkin_date', '$checkout_date')";
+
+        try {
+            $result = $this->conn->query($sql);
+            if (!$result) {
+                throw new Exception("query failed");
+            }
+        } catch (Exception $e) {
+            $err_msg = $e->getMessage();
+            throw new Exception($e);
+        }
+
     }
 
     public function __destruct() {

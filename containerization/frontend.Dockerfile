@@ -2,6 +2,8 @@ FROM php:8.1-apache
 
 RUN docker-php-ext-install mysqli pdo pdo_mysql && docker-php-ext-enable pdo_mysql
 
+RUN docker-php-ext-install calendar
+
 COPY public /var/www/html/
 
 COPY config.php /var/www/config/config.php

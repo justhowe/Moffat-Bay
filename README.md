@@ -107,4 +107,5 @@ you just need to run this from the directory the code is in or it wont work. I a
          |--login.php
          |--style.css
 ```
-then we will have a clean url like a real website https://some-website/login 
+then we will have a clean url like a real website https://some-website/login
+- check db locally with `mysql -u moffat_user -pmoffat_password -h localhost -P 33306 -D moffat_db`

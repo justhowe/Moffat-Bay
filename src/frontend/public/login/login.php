@@ -2,7 +2,9 @@
 
 require_once '../model/DAO.php';
 
-session_start();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST["username"];
@@ -17,13 +19,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $ambiguous_err_msg = "Login Credentials not valid";
 
         $existing_user = $dao->get_user_by_username($username);
-        if($existing_user->get_password_hash() == password_hash($password, PASSWORD_DEFAULT)) {
+        if ($existing_user && password_verify($password, $existing_user->get_password_hash())) {
 
             // we should use this superglobal $_SESSION["logged_in"]
             // throughout the app to check if the user is logged in or not
             $_SESSION["logged_in"] = $username;
-            header("Location: ../index.php");
-
+            if (isset($_SESSION["referer"])) {
+                header($_SESSION["referer"]);
+            } else {
+                header("Location: ../index.php");
+            }
         } else {
             // this superglobal we can use to check if any expected
             // errors arise from our logic

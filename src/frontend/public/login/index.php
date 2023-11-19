@@ -34,7 +34,7 @@ if (session_status() == PHP_SESSION_NONE) {
             <p>
                 <a href="#">Forgot Password?</a>
                 <br>
-                <a href="#">New user? Register now</a>
+                <a href="../register/">New user? Register now</a>
             </p>
         </div>
     </body>
