@@ -24,8 +24,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // we should use this superglobal $_SESSION["logged_in"]
             // throughout the app to check if the user is logged in or not
             $_SESSION["logged_in"] = $username;
-            if (isset($_SESSION["referer"])) {
-                header($_SESSION["referer"]);
+            if (isset($_SESSION["referrer"])) {
+                $referrer = $_SESSION["referrer"];
+                header("Location: $referrer");
             } else {
                 header("Location: ../index.php");
             }

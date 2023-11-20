@@ -22,7 +22,7 @@ function generate_error_modal_container(): string {
       z-index: 1000;
       border-radius: 20px;
       opacity: 1;
-      animation: fadeInOut 5s forwards;
+      animation: fadeInOut 7s forwards;
     }
     
       @keyframes fadeInOut {

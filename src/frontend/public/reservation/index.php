@@ -12,14 +12,14 @@ if (session_status() == PHP_SESSION_NONE) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Room Reservations</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles/styles.css">
 </head>
     <body>
     <?php
     echo generate_navbar();
     echo generate_error_modal_container();
     ?>
-    <form method="post" action="process_list_room_request.php">
+    <form method="post" action="room_list_view.php">
 
         <label for="checkin_date">Choose a check in date:</label>
         <input type="date" id="checkin_date" name="checkin_date">

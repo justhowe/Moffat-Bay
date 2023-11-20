@@ -21,10 +21,6 @@ function throw_exception(){
 }
 
 function check_deps(){
-  local os=$(uname)
-  if [[ "$os" != "Darwin" ]]; then
-    throw_exception "this is only tested on macos and not $(uname)"
-  fi
   which docker > /dev/null || throw_exception "docker not installed"
 }
 
@@ -33,8 +29,8 @@ function create_containers() {
   cp frontend.Dockerfile src/frontend/.
   cp config.php src/frontend/.
   cp database.Dockerfile src/database/.
-  docker compose -f moffat-compose.yml build || throw_exception "failed to build project"
-  docker compose -f moffat-compose.yml up -d || throw_exception "failed to start project"
+  docker-compose -f moffat-compose.yml build || throw_exception "failed to build project"
+  docker-compose -f moffat-compose.yml up -d || throw_exception "failed to start project"
   rm -rf src
 }
 

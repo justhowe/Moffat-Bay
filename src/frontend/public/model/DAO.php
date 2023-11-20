@@ -109,7 +109,26 @@ class DAO {
             }
         } catch (Exception $e) {
             $err_msg = $e->getMessage();
-            throw new Exception($e);
+            return false;
+        }
+        return true;
+    }
+
+    public function get_room_by_id($room_id): Room {
+        $sql = "SELECT * FROM rooms r WHERE r.room_id = $room_id;";
+        $result = $this->conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            return new Room(
+                $row['room_id'],
+                $row['bed_type'],
+                $row['number_of_beds'],
+                $row['max_guests'],
+                $row['price']
+            );
+        } else {
+            throw new NoSuchRoomException("room by id $room_id does not exist");
         }
 
     }
