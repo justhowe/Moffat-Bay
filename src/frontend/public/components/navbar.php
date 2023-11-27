@@ -104,6 +104,7 @@ function generate_navbar(): string {
                 <a href="../reservation/">Reservations</a>
                 <a href="../about/#">About Moffat Bay</a>
                 <a href="../#">Attractions</a>
+                <a href="../contact/">Contact Us</a>
                 <a href="../index.php">Home</a>
             </div>
         </div>

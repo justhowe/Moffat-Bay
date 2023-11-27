@@ -1,3 +1,12 @@
+<?php
+require_once '../components/navbar.php';
+require_once '../components/error_modal.php';
+
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -103,17 +112,13 @@
 </style>
 </head>
 <body>
+    <?php
+    echo generate_navbar();
+    echo generate_error_modal_container();
+    ?>
 <header>
   <div class="container">
     <h1><a href="#">Moffat Bay Lodge</a></h1>
-    <nav>
-      <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Services</a></li>
-        <li><a href="#">Contact</a></li>
-      </ul>
-    </nav>
   </div>
 </header>
 
@@ -134,7 +139,7 @@
 </div>
 
 <div class="social-icons">
-  <!-- Replace with your own image paths -->
+  <!-- our own image paths -->
   <a href="#"><img src="facebook-icon.png" alt="Facebook"></a>
   <a href="#"><img src="twitter-icon.png" alt="Twitter"></a>
   <a href="#"><img src="snapchat-icon.png" alt="Snapchat"></a>
