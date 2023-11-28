@@ -56,7 +56,12 @@ if(isset($_POST['register'])) {
             // newly created users should be considered logged
             // bring them back to main page or rooms page
             $_SESSION["logged_in"] = $username;
-            header("Location: ../index.php");
+            if(isset($_SESSION["referrer"])) {
+                $referrer = $_SESSION["referrer"];
+                header("Location: $referrer");
+            } else {
+                header("Location: ../index.php");
+            }
         } catch (Exception $e) {
             $_SESSION['error_msg'] = "could not create user";
             header("Location: index.php");

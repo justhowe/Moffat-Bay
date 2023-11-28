@@ -98,6 +98,14 @@ you just need to run this from the directory the code is in or it wont work. I a
 - remember to use `require_once` instead of `include` when the same dependency will be used in multiple places
 - the function `session_start()` will create a new session only if one does not exist, but reuse if one does exist
 - you can pass values around the application like a context object with [PHP Superglobals](https://www.php.net/manual/en/language.variables.superglobals.php)
+- if you want to pass a class object around in superglobals then it needs to be serialized / deserialized
+```injectablephp
+// serialize
+$_SESSION['room'] = serialize($room)
+// deserialize
+$serialized_room = $_SESSION["room"];
+$room = unserialize($serialized_room);
+```
 - if you separate your web content into something like this:
 ```
     app
@@ -109,3 +117,7 @@ you just need to run this from the directory the code is in or it wont work. I a
 ```
 then we will have a clean url like a real website https://some-website/login
 - check db locally with `mysql -u moffat_user -pmoffat_password -h localhost -P 33306 -D moffat_db`
+- you can do rudimentary console debugging by putting the value you want to track in the error message that the modal component uses like
+```injectablephp
+$_SESSION['error_msg'] = $_SESSION['room'];
+```
