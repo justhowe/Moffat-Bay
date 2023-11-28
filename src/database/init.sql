@@ -170,8 +170,7 @@ END $$
 DELIMITER ;
 
 -- Get rooms that are not used in another reservation for the desired duration, bed type, and number
--- CALL GetAvailableRoomsByRoomType('2023-10-25 00:00:00', '2023-10-30 00:00:00', 'Queen', 2);
--- CALL GetAvailableRoomsByRoomType('2023-11-20 12:00:00', '2023-11-21 12:00:00', 'King', 1);
+-- CALL GetAvailableRoomsByGuests('2023-10-25 00:00:00', '2023-10-30 00:00:00', 2);
 DELIMITER $$
 CREATE PROCEDURE GetAvailableRoomsByGuests(
     IN checkin_date TIMESTAMP,
@@ -196,6 +195,22 @@ BEGIN
     SELECT room_id, bed_type, number_of_beds, max_guests, price
     FROM available_rooms
     WHERE availability = 1 AND number_of_guests <= max_guests;
+END $$
+DELIMITER ;
+
+-- Get reservations that are in use for a user if the check in date or check out date is in the future
+-- CALL GetActiveReservationsWithDetailsForUsername('bryson@localhost.com');
+DELIMITER $$
+CREATE PROCEDURE GetActiveReservationsWithDetailsForUsername(
+    IN p_username VARCHAR(255)
+    )
+BEGIN
+    SELECT *
+    FROM reservations res
+             INNER JOIN rooms r ON res.room_id = r.room_id
+             INNER JOIN users u ON res.user_id = u.user_id
+    WHERE res.user_id = (SELECT user_id FROM users uu WHERE uu.username = p_username)
+         AND (res.check_in_date >= NOW() OR res.check_out_date >= NOW());
 END $$
 DELIMITER ;
 

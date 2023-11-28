@@ -3,8 +3,9 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 require_once '../../config/config.php';
-require_once '../model/user.php';
-require_once '../model/room.php';
+require_once 'user.php';
+require_once 'room.php';
+require_once 'reservation.php';
 require_once '../exception/exceptions.php';
 /**
  * this is the data access object that i think should hold most of our
@@ -96,6 +97,42 @@ class DAO {
             );
         }
         return $rooms;
+    }
+
+    public function get_active_reservations_for_user($username): Reservation {
+        $stmt = $this->conn->prepare("CALL GetActiveReservationsWithDetailsForUsername(?);");
+        $stmt->bind_param('s', $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        // TODO what do we do if there are multiple concurrent reservations for a user? currently returns only 1
+
+        $reservation = null;
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $reservation = new Reservation(
+                $row["reservation_id"],
+                new User(
+                    $row['username'],
+                    "redacted",
+                    $row['first_name'],
+                    $row['last_name'],
+                    $row['phone_number'],
+                    $row['user_id']
+                ),
+                new Room(
+                    $row['room_id'],
+                    $row['bed_type'],
+                    $row['number_of_beds'],
+                    $row['max_guests'],
+                    $row['price']
+                ),
+                $row["check_in_date"],
+                $row["check_out_date"]
+            );
+        } else {
+            throw new NoSuchReservationForUser("$username does not have an active or pending reservation");
+        }
+        return $reservation;
     }
 
     public function create_reservation($user_id, $room_id, $checkin_date, $checkout_date) {
