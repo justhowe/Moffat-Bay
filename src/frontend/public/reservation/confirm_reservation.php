@@ -12,15 +12,17 @@ if (session_status() == PHP_SESSION_NONE) {
  * redirected to login and given a referral back here
  */
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $serialized_room = $_SESSION["room"];
-    $room = unserialize($serialized_room);
+if (isset($_SESSION['room'])) {
 
+    // if they arent logged in, send to login and maintain reference to this page
     if (!isset($_SESSION["logged_in"])) {
         $_SESSION["referrer"] = "../reservation/confirm_reservation.php";
         header("Location: ../login/index.php");
         exit();
     }
+
+    $serialized_room = $_SESSION["room"];
+    $room = unserialize($serialized_room);
 
     $room_id = $room->get_room_id();
     $room_type = $room->get_bed_type();
