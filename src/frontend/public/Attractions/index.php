@@ -1,3 +1,12 @@
+<?php
+require_once '../components/navbar.php';
+require_once '../components/error_modal.php';
+
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,16 +16,13 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <?php
+        echo generate_navbar();
+        echo generate_error_modal_container();
+    ?>
     <header>
         <h1>Welcome to Moffat Bay Lodge Attractions</h1>
-        <nav>
-            <ul>
-                <li><a href="index.php">Home</a></li>
-                <li><a href="aboutus.php">About Us</a></li>
-                <li><a href="attractions.php">Attractions</a></li>
-                <li><a href="contact.php">Contact Us</a></li>
-            </ul>
-        </nav>
+
      </header>   
    
     <section id="hiking">
