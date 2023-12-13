@@ -1,6 +1,7 @@
 <?php
 require_once '../components/navbar.php';
 require_once '../components/error_modal.php';
+require_once '../components/footer.php';
 
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
@@ -52,11 +53,9 @@ if (session_status() == PHP_SESSION_NONE) {
         <p>Explore the underwater world and experience the stunning marine life in our coastal waters. Our experienced scuba instructors will ensure a safe and enjoyable dive...</p>
         <button onclick="book('scuba-diving')">Book Scuba Diving</button>
     </section>
-
+    <?php
+            echo generate_footer();
+    ?>
     <script src="script.js"></script>
-    
-  <div class="footer">
-            <p>© 2023 Moffat Bay Lodge</p>
-        </div>
     </body>
 </html>   

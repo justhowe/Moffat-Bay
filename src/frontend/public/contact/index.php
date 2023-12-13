@@ -1,6 +1,7 @@
 <?php
 require_once '../components/navbar.php';
 require_once '../components/error_modal.php';
+require_once '../components/footer.php';
 
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
@@ -112,15 +113,10 @@ if (session_status() == PHP_SESSION_NONE) {
 </style>
 </head>
 <body>
-    <?php
+  <?php
     echo generate_navbar();
     echo generate_error_modal_container();
-    ?>
-<header>
-  <div class="container">
-    <h1><a href="#">Moffat Bay Lodge</a></h1>
-  </div>
-</header>
+  ?>
 
 <div class="contact-form">
   <h2 class="contact-title">Contact Us</h2>
@@ -145,6 +141,8 @@ if (session_status() == PHP_SESSION_NONE) {
   <a href="#"><img src="snapchat-icon.png" alt="Snapchat"></a>
   <a href="#"><img src="instagram-icon.png" alt="Instagram"></a>
 </div>
-
+<?php
+  echo generate_footer();
+?>
 </body>
 </html>

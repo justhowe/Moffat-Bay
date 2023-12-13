@@ -1,6 +1,7 @@
 <?php
 require_once '../components/navbar.php';
 require_once '../components/error_modal.php';
+require_once '../components/footer.php';
 
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
@@ -54,5 +55,8 @@ if (session_status() == PHP_SESSION_NONE) {
                 Already a member? <a href="../login/">Sign in</a>
             </p>
         </form>
+        <?php
+            echo generate_footer();
+        ?>
     </body>
 </html>
