@@ -73,8 +73,8 @@ HTML;
 </head>
     <body>
     <?php
-    echo generate_navbar();
-    echo generate_error_modal_container();
+        echo generate_navbar();
+        echo generate_error_modal_container();
     ?>
     <div class="res-content-container">
         <div class="res-preview">
