@@ -83,7 +83,7 @@ HTML;
             <!-- put pretty much nothing in here, put all style in component-->
         </div>
         <div class="res-date-picker">
-            <h4>Make a New Reservation</h4>
+            <h1>Make a New Reservation</h1>
             <form method="post" action="room_list_view.php">
 
                 <label for="checkin_date">Choose a check in date:</label>
@@ -100,7 +100,7 @@ HTML;
                     <option value="4">4</option>
                     <option value="5">5</option>
                 </select>
-
+                <br /><br />
                 <button type="submit">Find Available Rooms</button>
             </form>
         </div>

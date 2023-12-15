@@ -75,7 +75,49 @@ tr:hover {
 }
 
 .res-date-picker {
-
+    max-width: 300px;
+    padding: 16px;
+    background-color: #ffffff;
+    margin: 50px auto;
+    box-shadow: 0px 0px 10px 0px grey;
 }
 
+.res-date-picker h1 {
+    text-align: center;
+    margin-bottom: 24px;
+}
 
+.res-date-picker label {
+    display: block;
+    margin-bottom: 4px;
+}
+
+.res-date-picker input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 16px;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+}
+
+.res-date-picker button {
+    width: 100%;
+    padding: 8px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.res-date-picker button:hover {
+    background-color: #0056b3;
+}
+
+.res-date-picker a {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+.res-date-picker a:hover {
+    text-decoration: underline;
+}

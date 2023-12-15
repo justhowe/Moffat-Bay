@@ -53,6 +53,7 @@ if (session_status() == PHP_SESSION_NONE) {
     margin-right: 10px;
   }
 
+  
   .contact-title {
     font-size: 24px;
     color: #333;
@@ -60,40 +61,59 @@ if (session_status() == PHP_SESSION_NONE) {
     padding: 10px 0;
   }
 
+  .input-group{
+    margin: 10px 0;
+  }
+  .input-group label{
+      display: block;
+      text-align: center;
+      margin: 10px 0;
+  }
+  .input-group input{
+      width: 100%;
+      padding: 10px;
+  }
+
   .contact-form {
-    max-width: 500px;
-    margin: 20px auto;
+    max-width: 300px;
+    margin: 50px auto;
     padding: 20px;
     background: #fff;
     border: 1px solid #ddd;
+    box-shadow: 0px 0px 10px 0px grey;
+  }
+
+  .contact-form h1 {
+    text-align: center;
+    margin-bottom: 24px;
   }
 
   .contact-form label {
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 4px;
   }
 
   .contact-form input[type="text"],
   .contact-form input[type="email"],
   .contact-form textarea {
-    width: 94%;
-    padding: 5px;
-    margin-bottom: 20px;
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 16px;
     border: 1px solid #ddd;
+    box-sizing: border-box;
   }
 
   .contact-form button {
-    display: block;
     width: 100%;
-    padding: 10px;
-    background: #333;
-    color: #fff;
-    border: 0;
+    padding: 8px;
+    background: #007BFF;
+    color: white;
+    border: none;
     cursor: pointer;
   }
 
   .contact-form button:hover {
-    background: #555;
+    background: #0056b3;
   }
 
   .social-icons {
@@ -117,32 +137,39 @@ if (session_status() == PHP_SESSION_NONE) {
     echo generate_navbar();
     echo generate_error_modal_container();
   ?>
-
-<div class="contact-form">
-  <h2 class="contact-title">Contact Us</h2>
+  <div class="contact-form">
+    <div class="header">
+      <h1 class="contact-title">Contact Us</h1>
+    </div>
     <form method="post">
-  <label for="name">Name</label>
-  <input type="text" id="name" name="name" placeholder="Enter Your Name">
+      <div class="input-group">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" placeholder="Enter Your Name">
+      </div>
+      <div class="input-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="Enter Your Email">
+      </div>
+      <div class="input-group">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" placeholder="Enter Your Message"></textarea>
+      </div>
+      <div class="input-group">
+        <button type="submit">Submit</button>
+      </div>
 
-  <label for="email">Email</label>
-  <input type="email" id="email" name="email" placeholder="Enter Your Email">
+    </form>
+  </div>
 
-  <label for="message">Message</label>
-  <textarea id="message" name="message" placeholder="Enter Your Message"></textarea>
-
-  <button type="submit">Submit</button>
-</form>
-</div>
-
-<div class="social-icons">
-  <!-- our own image paths -->
-  <a href="#"><img src="facebook-icon.png" alt="Facebook"></a>
-  <a href="#"><img src="twitter-icon.png" alt="Twitter"></a>
-  <a href="#"><img src="snapchat-icon.png" alt="Snapchat"></a>
-  <a href="#"><img src="instagram-icon.png" alt="Instagram"></a>
-</div>
-<?php
-  echo generate_footer();
-?>
+  <div class="social-icons">
+    <!-- our own image paths -->
+    <a href="#"><img src="facebook-icon.png" alt="Facebook"></a>
+    <a href="#"><img src="twitter-icon.png" alt="Twitter"></a>
+    <a href="#"><img src="snapchat-icon.png" alt="Snapchat"></a>
+    <a href="#"><img src="instagram-icon.png" alt="Instagram"></a>
+  </div>
+  <?php
+    echo generate_footer();
+  ?>
 </body>
 </html>

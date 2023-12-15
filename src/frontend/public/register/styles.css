@@ -4,8 +4,6 @@ body{
 .header{
     padding: 20px;
     text-align: center;
-    background: #1abc9c;
-    color: white;
 }
 .input-group{
     margin: 10px 0;
@@ -27,4 +25,52 @@ body{
     background: #1abc9c;
     border: none;
     cursor: pointer;
+}
+
+.reg-container {
+    max-width: 300px;
+    padding: 16px;
+    background-color: #ffffff;
+    margin: 50px auto;
+    box-shadow: 0px 0px 10px 0px grey;
+}
+
+.reg-container h2 {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.reg-container label {
+    display: block;
+    margin-bottom: 4px;
+}
+
+.reg-container input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 16px;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+}
+
+.reg-container button {
+    width: 100%;
+    padding: 8px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.reg-container button:hover {
+    background-color: #0056b3;
+}
+
+.reg-container a {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+.reg-container a:hover {
+    text-decoration: underline;
 }
