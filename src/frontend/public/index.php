@@ -1,6 +1,7 @@
 <?php
 require_once 'components/navbar.php';
 require_once 'components/error_modal.php';
+require_once 'components/footer.php';
 
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
@@ -47,5 +48,8 @@ if (session_status() == PHP_SESSION_NONE) {
             </div>
             <div class="item5"><img src="assets/lodge.jpg" height="100%" width="100%"></div>
         </div>
+        <?php
+            echo generate_footer();
+        ?>
     </body>
 </html>

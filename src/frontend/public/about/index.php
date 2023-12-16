@@ -1,6 +1,7 @@
 <?php
 require_once '../components/navbar.php';
 require_once '../components/error_modal.php';
+require_once '../components/footer.php';
 
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
@@ -17,10 +18,10 @@ if (session_status() == PHP_SESSION_NONE) {
     </head>
     <body>
         <?php
-        echo generate_navbar();
-        echo generate_error_modal_container();
+            echo generate_navbar();
+            echo generate_error_modal_container();
         ?>
-        <div class="container">
+        <div class="grid-container">
             <div class="header">
                 <h1>About Moffat Bay Lodge</h1>
             </div>
@@ -30,7 +31,7 @@ if (session_status() == PHP_SESSION_NONE) {
                 <p>Our lodge provides leisure activities and a selection of guided tours and adventures. </p>
                 <p>
                 <p>At Moffat Bay Lodge, we are committed to providing great experience. We hope that you will choose to join us
-                    for unforgeabale experience.</p>
+                    for unforgettable experience.</p>
                 <!-- Image container for About Us page -->
                 <div class="image-container">
                     <img src="../assets/Logo.png" alt="About Moffat Bay Lodge">
@@ -57,8 +58,8 @@ if (session_status() == PHP_SESSION_NONE) {
             <div class="award">&#9734;&#9734;&#9734;&#9734;</div>
             <div class="award">&#9734;&#9734;&#9734;&#9734;&#9734;</div>
         </div>
-        <div class="footer">
-            <p>© 2023 Moffat Bay Lodge</p>
-        </div>
+        <?php
+            echo generate_footer();
+        ?>
     </body>
 </html>

@@ -1,3 +1,13 @@
+<?php
+require_once '../components/navbar.php';
+require_once '../components/error_modal.php';
+require_once '../components/footer.php';
+
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,16 +17,13 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <?php
+        echo generate_navbar();
+        echo generate_error_modal_container();
+    ?>
     <header>
         <h1>Welcome to Moffat Bay Lodge Attractions</h1>
-        <nav>
-            <ul>
-                <li><a href="index.php">Home</a></li>
-                <li><a href="aboutus.php">About Us</a></li>
-                <li><a href="attractions.php">Attractions</a></li>
-                <li><a href="contact.php">Contact Us</a></li>
-            </ul>
-        </nav>
+
      </header>   
    
     <section id="hiking">
@@ -46,11 +53,9 @@
         <p>Explore the underwater world and experience the stunning marine life in our coastal waters. Our experienced scuba instructors will ensure a safe and enjoyable dive...</p>
         <button onclick="book('scuba-diving')">Book Scuba Diving</button>
     </section>
-
+    <?php
+            echo generate_footer();
+    ?>
     <script src="script.js"></script>
-    
-  <div class="footer">
-            <p>© 2023 Moffat Bay Lodge</p>
-        </div>
     </body>
 </html>   

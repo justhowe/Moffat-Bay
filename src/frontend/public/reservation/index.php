@@ -1,6 +1,7 @@
 <?php
 require_once '../components/navbar.php';
 require_once '../components/error_modal.php';
+require_once '../components/footer.php';
 require_once '../model/DAO.php';
 
 if (session_status() == PHP_SESSION_NONE) {
@@ -73,8 +74,8 @@ HTML;
 </head>
     <body>
     <?php
-    echo generate_navbar();
-    echo generate_error_modal_container();
+        echo generate_navbar();
+        echo generate_error_modal_container();
     ?>
     <div class="res-content-container">
         <div class="res-preview">
@@ -82,7 +83,7 @@ HTML;
             <!-- put pretty much nothing in here, put all style in component-->
         </div>
         <div class="res-date-picker">
-            <h4>Make a New Reservation</h4>
+            <h1>Make a New Reservation</h1>
             <form method="post" action="room_list_view.php">
 
                 <label for="checkin_date">Choose a check in date:</label>
@@ -99,13 +100,13 @@ HTML;
                     <option value="4">4</option>
                     <option value="5">5</option>
                 </select>
-
+                <br /><br />
                 <button type="submit">Find Available Rooms</button>
             </form>
         </div>
     </div>
-
-
-
+    <?php
+            echo generate_footer();
+    ?>
     </body>
 </html>
